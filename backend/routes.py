@@ -62,3 +62,10 @@ def health():
 def count():
     count = db.songs.count_documents({})
     return jsonify({"count": count}), 200
+
+@app.route("/song", methods=["GET"])
+def songs():
+    # Obtener todos los documentos de la colección
+    documents = list(db.songs.find({}))
+        
+    return {"songs": parse_json(documents)}, 200
